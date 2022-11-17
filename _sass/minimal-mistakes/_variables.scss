@@ -6,10 +6,10 @@
    Typography
    ========================================================================== */
 
-$doc-font-size: 16 !default;
+$doc-font-size: 14 !default;
 
 /* paragraph indention */
-$paragraph-indent: false !default; // true, false (default)
+$paragraph-indent: true !default; // true, false (default)
 $indent-var: 1.3em !default;
 
 /* system typefaces */
@@ -29,8 +29,8 @@ $bodoni: "Bodoni MT", serif !default;
 $calisto: "Calisto MT", serif !default;
 $garamond: Garamond, serif !default;
 
-$global-font-family: $sans-serif !default;
-$header-font-family: $sans-serif !default;
+$global-font-family: $georgia;
+$header-font-family: $georgia;
 $caption-font-family: $serif !default;
 
 /* type scale */
@@ -61,7 +61,7 @@ $darker-gray: mix(#000, $gray, 60%) !default;
 $light-gray: mix(#fff, $gray, 50%) !default;
 $lighter-gray: mix(#fff, $gray, 90%) !default;
 
-$background-color: #fff !default;
+$background-color: rgb(241, 237, 234) !default;
 $code-background-color: #fafafa !default;
 $code-background-color-dark: $light-gray !default;
 $text-color: $dark-gray !default;
