@@ -20,7 +20,7 @@ title                    : "Ari Benjamin: the blog"
 title_separator          : "-"
 subtitle                 : # site tagline that appears below site title in masthead
 name                     : "Ari Benjamin"
-description              : "A blog about neuroscience (the computational sort) and the good academic life."
+description              : "A blog about neuroscience (the computational sort)."
 url                      : "https://aribenjamin.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : "aribenjamin/aribenjamin.github.io"
@@ -103,31 +103,31 @@ analytics:
 
 
 # Site Author
-author:
-  name             : "Ari Benjamin"
-  avatar           : "https://scholar.googleusercontent.com/citations?view_op=medium_photo&user=GW6D4ZIAAAAJ&citpid=1"
-  bio              : "A computational neuroscientist and human."
-  location         : 
-  email            :
-  links:
-    - label: "Email"
-      icon: "fas fa-fw fa-envelope-square"
-      url: "mailto:ari.s.benjamin@gmail.com"
-    - label: "Website"
-      icon: "fas fa-fw fa-link"
-      url: "https://ari-benjamin.com"
-    - label: "Twitter"
-      icon: "fab fa-fw fa-twitter-square"
-      url: "https://twitter.com/aribenjamin"
-    - label: "Mastodon"
-      icon: "fab fa-mastodon"
-      url: "https://fediscience.org/web/@aribenjamin"
-    - label: "GitHub"
-      icon: "fab fa-fw fa-github"
-      url: "https://github.com/aribenjamin"
-    - label: "Google Scholar"
-      icon: "fab fa-fw fa-link"
-      url: "https://scholar.google.com/citations?user=GW6D4ZIAAAAJ&hl=en"
+# author:
+#   name             : "Ari Benjamin"
+#   avatar           : "https://scholar.googleusercontent.com/citations?view_op=medium_photo&user=GW6D4ZIAAAAJ&citpid=1"
+#   bio              : "A computational neuroscientist and human."
+#   location         : 
+#   email            :
+#   links:
+#     - label: "Email"
+#       icon: "fas fa-fw fa-envelope-square"
+#       url: "mailto:ari.s.benjamin@gmail.com"
+#     - label: "Website"
+#       icon: "fas fa-fw fa-link"
+#       url: "https://ari-benjamin.com"
+#     - label: "Twitter"
+#       icon: "fab fa-fw fa-twitter-square"
+#       url: "https://twitter.com/aribenjamin"
+#     - label: "Mastodon"
+#       icon: "fab fa-mastodon"
+#       url: "https://fediscience.org/web/@aribenjamin"
+#     - label: "GitHub"
+#       icon: "fab fa-fw fa-github"
+#       url: "https://github.com/aribenjamin"
+#     - label: "Google Scholar"
+#       icon: "fab fa-fw fa-link"
+#       url: "https://scholar.google.com/citations?user=GW6D4ZIAAAAJ&hl=en"
 
 # Site Footer
 footer:
