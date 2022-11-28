@@ -1,7 +1,6 @@
 ---
 title: Hidden perils of a learning pill
-description: Or, Don't Reopen that Critical Period!
-A blog post about a future technology.
+description: Or, Don't Reopen that Critical Period! A blog post about a future technology.
 ---
 
 What it means to age, and in part to be human, is to become set in one's patterns and ways. But what if you could reawaken your ability to learn? Facts and events would suddenly stick in your mind again, the way young children are sponges for information. Imagine learning a second language at 60 as easily as a 5 year old. Perhaps there was a skill you wish you had begun at a younger age — piano, violin, soccer, coding. What would you learn?
@@ -13,7 +12,7 @@ There's no doubt that a boost to plasticity would be wonderful for people in nee
 First, some background. Feel free to skip ahead. 
 
 #### Critical periods for learning
-<font size=”4”>
+<font size="4">
 The "critical period" refers to a special phase in a developing brain when, put simply, learning is astonishingly fast and effective. If a young brain is damaged in this phase – a minor stroke, for example – the brain quickly repurposes non-damaged tissue for the lost functions. People can live decades before a doctor tells them they must have had a stroke, judging by an unusual brain scan. Individuals blind from birth repurpose their visual cortices for audition, action, and higher cognitive functions. At these young stages, one begins to think that brain tissue is just learning stuff capable of learning anything. (In reality a young brain won't learn "anything", though we still don't have any idea how to predict what sorts of things are in or out of bounds.)
 
 The critical period ends at different times for different functions. After about 8 months in humans, if sight is restored in a blind eye the brain will nevertheless not use that eye for vision. This is why critical periods are called critical – it's critical that restorative therapies be delivered in this phase.

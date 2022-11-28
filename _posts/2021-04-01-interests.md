@@ -1,10 +1,14 @@
 ---
-title: Redesigning the Kording Lab's practices
-description: The 'design process' works really well for creating a good culture
-header-img: assets/images/lab_redesign/overall_schem-01.png
+title: Visualizing my research interests
+# description: Seeing 
 ---
 
-## Seeing beyond the CV
+<figure><center>
+  <img width="700" src="{{site.baseurl}}/assets/images/interests/interests_ai.png" data-action="zoom">
+  <caption> Throughout my academic career I've been interested in sensing, in biological inspiration, and in understanding biology in the lens of its function. In 2016, I switched paths from bioinspired nanoscale materials engineering to computational neuroscience. Learning about deep learning was instrumental in this switch. </caption>
+</center></figure>
+
+# Seeing beyond the CV
 
 In a [book of work](https://studiogang.com/publication/monograph) by Studio Gang, a brilliant architectural firm led by Jeanne Gang, there is a sketch of the studio's themes and interests over time, mapped out in pencil just like the figure above. I thought it was brilliant, both an exercise and as a communicative device.
 
@@ -22,12 +26,8 @@ Instead of choosing colors by hand, I felt it would be easier to map the similar
 
 
 <figure><left>
-  <img width="200" style="float: left" src="{{site.baseurl}}/assets/images/interests/2d.png" data-action="zoom">
+  <img width="100" style="float: left" src="{{site.baseurl}}/assets/images/interests/2d.png" data-action="zoom">
   <caption> You can get a sense of the process here. This is a 2D embedding of the similarity matrix –  distances correspond to topic similarity. I've colored each point by its location in a 3D color space. </caption>
 </left></figure>
 
 
-<figure><center>
-  <img width="700" src="{{site.baseurl}}/assets/images/interests/interests_ai.png" data-action="zoom">
-  <caption> Throughout my academic career I've been interested in sensing, in biological inspiration, and in understanding biology in the lens of its function. In 2016, I switched paths from bioinspired nanoscale materials engineering to computational neuroscience. Learning about deep learning was instrumental in this switch. </caption>
-</center></figure>
