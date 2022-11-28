@@ -3,7 +3,7 @@ title: Redesigning the Kording Lab's practices
 description: The 'design process' works really well for creating a good culture.
 header-img: assets/images/lab_redesign/overall_schem-01.png
 ---
-<p style="margin-bottom:3cm;font-size:1em;">*This is a cross-post from the [Kording lab blog](https://kordinglab.com/2019/12/20/lab-redesign.html). I initiated this lab redesign under the philosophy that all things in life should be chosen by design, including the workplace.* </p>
+<p style="margin-bottom:2cm;font-size:.6em;">This is a cross-post from the [Kording lab blog](https://kordinglab.com/2019/12/20/lab-redesign.html). I initiated this lab redesign under the philosophy that all things in life should be chosen by design, including the workplace. </p>
 
 **Every lab is a set of practices, traditions, recurring events, and expectations.**
 These practices determine the daily rhythms of its members.
