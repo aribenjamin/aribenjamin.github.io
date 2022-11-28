@@ -3,7 +3,7 @@ title: Redesigning the Kording Lab's practices
 description: The 'design process' works really well for creating a good culture.
 header-img: assets/images/lab_redesign/overall_schem-01.png
 ---
-<p style="margin-bottom:3cm;font-size:7pt;">*This is a cross-post from the [Kording lab blog](https://kordinglab.com/2019/12/20/lab-redesign.html). I initiated this lab redesign under the philosophy that all things in life should be chosen by design, including the workplace.* </p>
+<p style="margin-bottom:3cm;font-size:1em;">*This is a cross-post from the [Kording lab blog](https://kordinglab.com/2019/12/20/lab-redesign.html). I initiated this lab redesign under the philosophy that all things in life should be chosen by design, including the workplace.* </p>
 
 **Every lab is a set of practices, traditions, recurring events, and expectations.**
 These practices determine the daily rhythms of its members.
@@ -201,7 +201,7 @@ member of the lab and discuss their work for an hour. Refreshes once a semester.
 to indicate if you would like not to be bothered (see pic)
 -  yoga mats
 -  a hammock
-<img width="200" style="transform:rotate(90deg); float: right" src="{{site.baseurl}}/assets/images/lab_redesign/pandas/20191122_182635.jpg" data-action="zoom">
+<img width="200" style="float: right" src="{{site.baseurl}}/assets/images/lab_redesign/pandas/20191122_182635.jpg" data-action="zoom">
 - a hangboard
 - plants
 - a tea kettle
