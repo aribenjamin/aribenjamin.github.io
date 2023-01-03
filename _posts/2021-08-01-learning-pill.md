@@ -7,7 +7,10 @@ What it means to age, and in part to be human, is to become set in one's pattern
 
 For a few decades now the field of critical period plasticity has promised this redemptive vision. The promise is medicalized, as is usual: in cases of stroke, surgical removal of brain tissue, or traumatic brain injury, one may very much wish for the ability to re-learn an ability that has been lost. If you've lost the ability to speak from a stroke (as in Broca's aphasia), it can take years of difficult rehab to relearn to communicate your thoughts, and even then complex expressions may entirely evade you. Learning like an infant would seem a godsend. 
 
-There's no doubt that a boost to plasticity would be wonderful for people in need. However, I think there are three big reasons to be cautious about this capability, if we ever stumble upon it. Expanded below, these are 1) a potentially unavoidable downside to the technology itself, 2) its potential for societal transformation, and 3) an issue of medical ethics.
+There's no doubt that a boost to plasticity would be wonderful for people in need. However, I think there are three big reasons to be cautious about this capability, if we ever stumble upon it. Expanded below, these are
+1) a potentially unavoidable downside to the technology itself, 
+2) its potential for societal transformation, and 
+3) an issue of medical ethics.
 
 First, some background. Feel free to skip ahead. 
 
