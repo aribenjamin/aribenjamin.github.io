@@ -143,7 +143,7 @@ footer:
       url: "https://twitter.com/aribenjamin"
     - label: "Mastodon"
       icon: "fab fa-mastodon"
-      url: "https://fediscience.org/web/@aribenjamin"
+      url: "https://neuromatch.social/@aribenjamin"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
       url: "https://github.com/aribenjamin"
