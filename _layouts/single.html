@@ -26,7 +26,6 @@ layout: default
     {% if page.excerpt %}<meta itemprop="description" content="{{ page.excerpt | markdownify | strip_html | strip_newlines | escape_once }}">{% endif %}
     {% if page.date %}<meta itemprop="datePublished" content="{{ page.date | date_to_xmlschema }}">{% endif %}
     {% if page.last_modified_at %}<meta itemprop="dateModified" content="{{ page.last_modified_at | date_to_xmlschema }}">{% endif %}
-    {% include page__date.html %}
     
     <div class="page__inner-wrap">
       {% unless page.header.overlay_color or page.header.overlay_image %}
@@ -37,6 +36,8 @@ layout: default
           {% include page__meta.html %}
         </header>
       {% endunless %}
+
+      {% include page__date.html %}
 
       <section class="page__content e-content" itemprop="text">
         {% if page.toc %}
