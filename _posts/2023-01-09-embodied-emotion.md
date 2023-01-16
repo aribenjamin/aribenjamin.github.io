@@ -1,13 +1,12 @@
 ---
 title: Why do we love a sauna?
-description: An explanation for of embodied emotion.
+description: Towards a computational theory of embodied emotion.
+teaser: Towards a computational theory of embodied emotion.
 ---
-
-Take a moment to remember the last time you took a hot bath. If you're like me, as soon as you entered the water you instantly relaxed. I mean, your muscles relaxed. But also _you_ relaxed, and perhaps your concerned tension of mind and anxiety about the day dissolved into acceptance and contentment. 
 
 It is impossible to deny that we carry emotions in our body[^1]. Stressed at work? You'll feel it in your back. Proud and joyful? Nervous? I'll let you finish those ones. 
 
-The arrow of causality exists in the other direction, too: you can affect your emotional state by addressing the body. A hot bath or sauna causes one's muscles to relax  – presumably to avoid overheating – which seems to cause the mind to relax, as well. The bidirectionality of emotion, mind, and body is no new news. Around the world there are dozens of healing traditions premised on the idea that our bodies affect our emotions. Today, you can find it in titles like _The Body Keeps the Score_ and in theraputic practices under the umbrella of "somatic" practices. 
+The arrow of causality exists in the other direction, too. You can affect your emotional state by addressing the body. Think back to the last time you took a hot bath. On entering the water your muscles relaxed, and also _you_ relaxed. This bidirectionality of emotion, mind, and body is no new news. Around the world there are dozens of healing traditions premised on the idea that our bodies affect our emotions. Today, you can find it in titles like _The Body Keeps the Score_ and in theraputic practices under the umbrella of "somatic" practices. 
 
 This aspect of our emotions – that they are affected by our bodily perception – is well-recognized in emotional psychology, where it forms the basis of the theory of _constructed emotion_. Emotions are not the same across all cultures – even the "basic ones" like anger and sadness. For just about every emotion that is felt as a "universal emotion" in the US, there is at least one culture for which that is not a basic emotional category. To make sense of this, theories of _constructed emotion_ say that emotions are perceptions of our bodies's visceral reactions[^2]. This means that they are influenced by the all the same category biases, cultural relativism, and linguistic associations as the rest of our perceptual decisions. For Lisa Feldman Barrett, among others, emotions are conceptual categorizations of that visceral stimulus. Emotional categories are perceptual concepts. If this idea is novel to you, I highly recommend this phenomenal podcast episodes about this idea by the great Invisibilia[^3].
 
