@@ -293,4 +293,4 @@ defaults:
       comments: # true
       share: 
       related: 
-      date: true
+      # date: true
