@@ -1,6 +1,6 @@
 ---
 title: Redesigning the Kording Lab's practices
-description: The 'design process' works really well for creating a good culture.
+excerpt: The 'design process' works really well for creating a good lab culture.
 header-img: assets/images/lab_redesign/overall_schem-01.png
 ---
 <p style="margin-bottom:2cm;font-size:.8em;">This is a cross-post from the <a href="https://kordinglab.com/2019/12/20/lab-redesign.html">Kording lab blog</a>. I initiated this redesign of the Kording Lab under the philosophy that all things in life should be chosen by design, including the workplace. The "us", "we", etc., refer to the pre-pandemic Kording Lab circa 2019. Many of these voting-based practices continued through the pandemic and well after I graduated from the lab mid-2022.</p>

@@ -1,7 +1,7 @@
 ---
 title: Why do we love a sauna?
 description: Towards a computational theory of embodied emotion.
-teaser: Towards a computational theory of embodied emotion.
+excerpt: Towards a computational theory of embodied emotion.
 ---
 
 It is impossible to deny that we carry emotions in our body[^1]. Stressed at work? You'll feel it in your back. Proud and joyful? Nervous? I'll let you finish those ones. 

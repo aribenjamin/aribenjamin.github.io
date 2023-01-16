@@ -1,6 +1,6 @@
 ---
 title: Visualizing my research interests
-# description: Seeing 
+excerpt: Beyond the resumé with color theory.
 ---
 
 <figure><center>

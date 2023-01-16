@@ -1,6 +1,6 @@
 ---
 title: Hidden perils of a learning pill
-description: Or, Don't Reopen that Critical Period! A blog post about a future technology.
+excerpt: Or, Don't Reopen that Critical Period! A blog post about a future technology.
 ---
 
 What it means to age, and in part to be human, is to become set in one's patterns and ways. But what if you could reawaken your ability to learn? Facts and events would suddenly stick in your mind again, the way young children are sponges for information. Imagine learning a second language at 60 as easily as a 5 year old. Perhaps there was a skill you wish you had begun at a younger age — piano, violin, soccer, coding. What would you learn?
