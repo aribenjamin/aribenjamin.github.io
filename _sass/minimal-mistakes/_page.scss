@@ -14,8 +14,8 @@
   -webkit-animation-delay: 0.15s;
   animation-delay: 0.15s;
 
-  @include breakpoint($medium-wide) {
-    max-width: $medium-wide;
+  @include breakpoint($medium) {
+    max-width: $medium;
   }
 }
 
