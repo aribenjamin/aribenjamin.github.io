@@ -19,40 +19,40 @@ In this post I go back to the basics and derive a new gradient estimator designe
 
 Suppose we have an agent with control over its actions. The environment responds stochastically to these actions, there is some reward associated with these outcomes. How can we maximize the expected value of rewards given our actions?
 
-This is the classic setup of policy gradients. The *policy* of an RL agent is its probability distribution over particular action, $$p(a)$$. This policy may be a lookup table listing the probabilities over all possible $$a$$, or it might be specified by some neural network with parameters $$\theta$$. Perhaps this network takes information about the state of the world and itself: $$a=f(s_t, \theta)$$. After an action is taken, there is some state $$s{t+1}$$ that pulls from $$p(s_{t+1}\mid a)$$, and some reward assocated with that state $$R(s)$$
+This is the classic setup of policy gradients. The *policy* of an RL agent is its probability distribution over particular action, $$p(a)$$. This policy may be a lookup table listing the probabilities over all possible $$a$$, or it might be specified by some neural network with parameters $$\theta$$. Perhaps this network takes information about the state of the world and itself: $$a=f(s_t, \theta)$$. After an action is taken, there is some state $$s{t+1}$$ that pulls from $$p(s_{t+1}\vert  a)$$, and some reward assocated with that state $$R(s)$$
 
 It's important to recognize there are **two** sources of stochasticity here. The first is the stochasticity our policy. Presumably we have control over this source stochasticity. The second is the stochasticity of the world given our actions – and this is external to the agent. 
 
-In this post I am primarily interested in this second source of stochasticity – the stochasticity of the world, given our actions. Let's write this down. Reality is noisy, and there is a probabilistic relation between $$a$$ and $$s_{t+1}$$, given conditionally as $$p(s_{t+1}\mid a)$$. The expected reward is then 
-$$V^\pi=\mathbb{E}_{p(a;\theta)}\left[\mathbb{E}_{p(s_{t+1}\mid a)}[R(s_{t+1})]\right]$$. The first expectation is due to stochasticity in the policy, and the second is due to stochasticity in the world. 
+In this post I am primarily interested in this second source of stochasticity – the stochasticity of the world, given our actions. Let's write this down. Reality is noisy, and there is a probabilistic relation between $$a$$ and $$s_{t+1}$$, given conditionally as $$p(s_{t+1}\vert  a)$$. The expected reward is then 
+$$V^\pi=\mathbb{E}_{p(a;\theta)}\left[\mathbb{E}_{p(s_{t+1}\vert  a)}[R(s_{t+1})]\right]$$. The first expectation is due to stochasticity in the policy, and the second is due to stochasticity in the world. 
 
-In order to improve this expected reward, we need to follow its gradient with respect to the parameters of the policy, $$\nabla_{\theta}V^\pi$$. We can split our desired gradient into two problems with the chain rule. First, what is the gradient of our value with respect to our policy, $$\nabla_a \mathbb{E}_{p(s_{t+1}\mid a)}[R(s_{t+1})]$$? Second, what is the gradient of our policy with respect to our parameters, $$\nabla_\theta a$$? This separation mirrors the two sources of stochasticity here (policy and environmental). 
+In order to improve this expected reward, we need to follow its gradient with respect to the parameters of the policy, $$\nabla_{\theta}V^\pi$$. We can split our desired gradient into two problems with the chain rule. First, what is the gradient of our value with respect to our policy, $$\nabla_a \mathbb{E}_{p(s_{t+1}\vert  a)}[R(s_{t+1})]$$? Second, what is the gradient of our policy with respect to our parameters, $$\nabla_\theta a$$? This separation mirrors the two sources of stochasticity here (policy and environmental). 
 
 ## Step 1: Estimating the value gradient, with respect to the policy
 
-To estimate $$\nabla_a \mathbb{E}_{p(s_{t+1}\mid a)}[R(s_{t+1})]$$ we'll use the REINFORCE trick. You can see this footnote[1] for a derivation; this trick is the identity,
+To estimate $$\nabla_a \mathbb{E}_{p(s_{t+1}\vert  a)}[R(s_{t+1})]$$ we'll use the REINFORCE trick. You can see this footnote[1] for a derivation; this trick is the identity,
 
 $$\nabla_{\theta}\mathbb{E}_{p(x;\theta)}[f(x)] = \mathbb{E}_{p(x;\theta)}[\nabla_{\theta} \left(\log p(x;\theta)\right) f(x) ]. $$
 
 Applied to our situation, this means that,
 
-$$\nabla_a \mathbb{E}_{p(s_{t+1}\mid a)}[R(s_{t+1})]=\mathbb{E}_{p(s_{t+1}\mid a)}[R(s_t) \nabla_{a} \log p(s_{t+1}\mid a)^T] .$$
+$$\nabla_a \mathbb{E}_{p(s_{t+1}\vert  a)}[R(s_{t+1})]=\mathbb{E}_{p(s_{t+1}\vert  a)}[R(s_t) \nabla_{a} \log p(s_{t+1}\vert  a)^T] .$$
 
-Unfortunately, we don't have access to $$\nabla_{a} \log p(s_{t+1}\mid a)$$. We can't backpropagate through the world! Without this, we won't be able to account for the stochasticity of reward, given our policy. I think this is a major downside of current RL. As far as I can tell, the usual approach is to just sweep the environmental stochasticity into the policy stochasticity and pretend it doesn't exist.
+Unfortunately, we don't have access to $$\nabla_{a} \log p(s_{t+1}\vert  a)$$. We can't backpropagate through the world! Without this, we won't be able to account for the stochasticity of reward, given our policy. I think this is a major downside of current RL. As far as I can tell, the usual approach is to just sweep the environmental stochasticity into the policy stochasticity and pretend it doesn't exist.
 
-#### Why we can't train a discriminative classifer for $$\nabla_{a} \log p(s_{t+1}\mid a)$$ : adversarial fragility.
+#### Why we can't train a discriminative classifer for $$\nabla_{a} \log p(s_{t+1}\vert  a)$$ : adversarial fragility.
 
-Now, one thing we could do is to train up an approximate neural network to approximate $$\log p(s_{t+1}\mid a)$$, and then use backprop to calculate $$\nabla_{a}\log p(s_{t+1}\mid a)$$. This is unlikely to be successful, because these will be adversarial examples. The gradient of a neural network classifer is not a robust estimator of the gradient of the (true) input/output relation.
+Now, one thing we could do is to train up an approximate neural network to approximate $$\log p(s_{t+1}\vert  a)$$, and then use backprop to calculate $$\nabla_{a}\log p(s_{t+1}\vert  a)$$. This is unlikely to be successful, because these will be adversarial examples. The gradient of a neural network classifer is not a robust estimator of the gradient of the (true) input/output relation.
 
 #### An alternative strategy: use Bayes' Rule
 
-Using Bayes' rule, we can flip around the problematic $$\nabla_{a} \log p(s_{t+1}\mid a)$$ into something else with better properties. First, with Bayes Rule,
+Using Bayes' rule, we can flip around the problematic $$\nabla_{a} \log p(s_{t+1}\vert  a)$$ into something else with better properties. First, with Bayes Rule,
 
-$$ \nabla_{a} \log p(s_{t+1}\mid a) = \nabla_{a} \left(\log p(a\mid s_{t+1}) + \log p(s_{t+1}) - \log p(a)\right) $$
+$$ \nabla_{a} \log p(s_{t+1}\vert  a) = \nabla_{a} \left(\log p(a\vert  s_{t+1}) + \log p(s_{t+1}) - \log p(a)\right) $$
 
 Taking the derivative, the $$p(s_{t+1})$$ goes away as it does not depend on $$a$$:
 
-$$\nabla_{a} \log p(s_{t+1}\mid a)= \nabla_{a} \log p(a\mid s_{t+1}) - \nabla_{a} \log p(a) $$
+$$\nabla_{a} \log p(s_{t+1}\vert  a)= \nabla_{a} \log p(a\vert  s_{t+1}) - \nabla_{a} \log p(a) $$
 
 Thus, the derivative we need is the difference between two score functions over our policy: one conditioned on the reward, and the other unconditioned. Perhaps 10 years ago this would have seemed like a dead end. But now there are wonderful methods for estimating such score functions.
 
@@ -67,14 +67,14 @@ I particularly like the proof of Kadkhodaie & Simoncelli, which I'll reproduce b
 
 If we obtain two denoising estimates of $$\hat{a}$$, one unconditional and the other conditioned on the outcome $$s_{t+1}$$, we can perform this very simple subtraction to get an estimate of the gradient:
 
-$$\nabla_{a} \log p(_{t+1}\mid a)= (\hat{a}_{\mid s_{t+1}}-a) - (\hat{a}-a) =  \hat{a}_{\mid s_{t+1}} - \hat{a}.$$
+$$\nabla_{a} \log p(_{t+1}\vert  a)= (\hat{a}_{\vert  s_{t+1}}-a) - (\hat{a}-a) =  \hat{a}_{\vert  s_{t+1}} - \hat{a}.$$
 
 This is remarkably simple. Looking to the strengths of diffusion models, furthermore, we can expect this estimator will have these advantages:
 1. It will work well in high-dimensional action spaces.
 2. It will benefit from significant pretraining in sessions without external reward.
 3. It will be much more robust, in the adversarial sense.
 
-To convince you of the third point, I decided to create a "canonical 9" using this roundabout method. I trained a denoising diffusion model on MNIST, using one network for both unconditional and conditional denoising. Using this pretrained denoising diffusion model, we can walk the pixels following $$\nabla_x\log p(y=9\mid x)$$ via the difference of denoising estimates $$\hat{x}_{9} - \hat{x}$$. 
+To convince you of the third point, I decided to create a "canonical 9" using this roundabout method. I trained a denoising diffusion model on MNIST, using one network for both unconditional and conditional denoising. Using this pretrained denoising diffusion model, we can walk the pixels following $$\nabla_x\log p(y=9\vert  x)$$ via the difference of denoising estimates $$\hat{x}_{9} - \hat{x}$$. 
 
 <figure>
   <img src="{{site.baseurl}}/assets/images/gradient_estimation/9_.gif" data-action="zoom" style="width:300px;" class="centerImage" >
@@ -84,7 +84,7 @@ To convince you of the third point, I decided to create a "canonical 9" using th
 
 Here's our final expression after plugging things in:
 
-$$\nabla_{a} \log p(s_{t+1}\mid a) =\mathbb{E}_{p(s_{t+1}\mid a)}[R(s_{t+1}) (\hat{a}_{\mid s_{t+1}} - \hat{a})^T  ]$$
+$$\nabla_{a} \log p(s_{t+1}\vert  a) =\mathbb{E}_{p(s_{t+1}\vert  a)}[R(s_{t+1}) (\hat{a}_{\vert  s_{t+1}} - \hat{a})^T  ]$$
 
 This includes two neural networks or function approximators:
 1. The action network, $$a = f(s,\epsilon, \theta)$$.
@@ -98,7 +98,7 @@ To reduce the variance of this estimator, we can include a reward prediction net
 
 If we a reward prediction $$\hat{R(s_{t+1})}=r(s_i,a)$$, we can plug this in to reduce the variance while remaining unbiased. The  policy gradient can then be written as:
 
-$$\nabla_{a} \log p(s_{t+1}\mid a) =\mathbb{E}_{p(s_{t+1}\mid a)}[(R(s_{t+1})-r(s_i,a)) (\hat{a}_{\mid s_{t+1}} - \hat{a})]$$
+$$\nabla_{a} \log p(s_{t+1}\vert  a) =\mathbb{E}_{p(s_{t+1}\vert  a)}[(R(s_{t+1})-r(s_i,a)) (\hat{a}_{\vert  s_{t+1}} - \hat{a})]$$
 
 
 ## Finally: the gradient w/r/t parameters 
@@ -119,18 +119,18 @@ We'd love to just use reparameterization, but unfortunately we can't reparameter
 
 Let's *combine* approaches #1 and #2[^2] and reparameterize our policy as $$a=f(s_t,\epsilon,\theta)$$. For our two sources of noise we are using two different styles of gradient estimation – reparameterization for the policy noise, and REINFORCE for the world noise. First, before invoking the denoising gradient approximation, we have
 
-$$\nabla_{\theta}V^\pi =\mathbb{E}_\epsilon \left[\nabla_\theta \left[\mathbb{E}_{p(s_{t+1}\mid a = f(s_t,\epsilon,\theta))}[R(s_{t+1})) ]\right]\right]$$
+$$\nabla_{\theta}V^\pi =\mathbb{E}_\epsilon \left[\nabla_\theta \left[\mathbb{E}_{p(s_{t+1}\vert  a = f(s_t,\epsilon,\theta))}[R(s_{t+1})) ]\right]\right]$$
 
 After the chain rule (remembering that $$\theta\rightarrow a\tilde{\rightarrow}s_{i+1}$$), we have:
 
-$$\nabla_{\theta}V^\pi =\mathbb{E}_\epsilon \left[\mathbb{E}_{p(s_{t+1}\mid a)}[R(s_t) \nabla_{a} \log p(s_{t+1}\mid a)^T \nabla_\theta f(s_t,\epsilon,\theta) ]\right]$$
+$$\nabla_{\theta}V^\pi =\mathbb{E}_\epsilon \left[\mathbb{E}_{p(s_{t+1}\vert  a)}[R(s_t) \nabla_{a} \log p(s_{t+1}\vert  a)^T \nabla_\theta f(s_t,\epsilon,\theta) ]\right]$$
 
 
 ### Putting it together: Denoising policy gradients for noisy environments
 
 Here's our final expression after plugging things in:
 
-$$\nabla_{\theta}V^\pi =\mathbb{E}_\epsilon \left[\mathbb{E}_{p(s_{t+1}\mid a)}[((R(s_{t+1})-r(s_i,a)) (\hat{a}_{\mid s_{t+1}} - \hat{a}))^T \nabla_\theta f(s_t,\epsilon,\theta) ]\right].$$
+$$\nabla_{\theta}V^\pi =\mathbb{E}_\epsilon \left[\mathbb{E}_{p(s_{t+1}\vert  a)}[((R(s_{t+1})-r(s_i,a)) (\hat{a}_{\vert  s_{t+1}} - \hat{a}))^T \nabla_\theta f(s_t,\epsilon,\theta) ]\right].$$
 
 And that's it! 
 
@@ -164,12 +164,12 @@ ___
 
     Dividing by $$p(\tilde{a})$$ on both sides and splitting the integral,
 
-    $$\frac{\nabla_{\tilde{a}}p(\tilde{a})}{p(\tilde{a})}\sigma^2=\int a p(a\mid \tilde{a}) da -\int \tilde{a} p(a\mid \tilde{a})da$$
+    $$\frac{\nabla_{\tilde{a}}p(\tilde{a})}{p(\tilde{a})}\sigma^2=\int a p(a\vert  \tilde{a}) da -\int \tilde{a} p(a\vert  \tilde{a})da$$
 
     The left-hand side simplifies to a derivative of a log. On the right, the left term is the mean of the posterior over $$a$$, which minimizes the MSE. Thus it is the optimal denoising estimate $$\hat{a}$$ given an observation of a noisy $$\tilde{a}$$. The right simplifies to $$y$$. 
 
     $$\nabla_{\tilde{a}}\log p(\tilde{a})\sigma^2=\hat{a}-\tilde{a}$$
 
-    Note this is the score of the noised distribution. For small enough $\sigma$, this will be quite close to score of the original.<br> One interesting aspect of this derivation is that we only invoked the properties of Gaussian noise once: in noting that $\int a p(a\mid \tilde{a}) da $ is the mean-squared error estimator of the unnoised input. This is true of other noise distributions, as well; the noise need not be Gaussian.
+    Note this is the score of the noised distribution. For small enough $\sigma$, this will be quite close to score of the original.<br> One interesting aspect of this derivation is that we only invoked the properties of Gaussian noise once: in noting that $\int a p(a\vert  \tilde{a}) da $ is the mean-squared error estimator of the unnoised input. This is true of other noise distributions, as well; the noise need not be Gaussian.
 
 [^4]: https://github.com/lucidrains/denoising-diffusion-pytorch
