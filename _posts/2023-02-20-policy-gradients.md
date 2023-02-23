@@ -14,7 +14,7 @@ In this post I go back to the basics and derive a new gradient estimator designe
 
 ## Self-improving in a stochastic world.
 <figure><center>
-  <img width="100" src="{{site.baseurl}}/assets/images/gradient_estimation/schema.png" data-action="zoom">
+  <img src="{{site.baseurl}}/assets/images/gradient_estimation/schema.png" data-action="zoom" style="width:200px;">
 </center></figure>
 
 Suppose we have an agent with control over its actions. The environment responds stochastically to these actions, there is some reward associated with these outcomes. How can we maximize the expected value of rewards given our actions?
@@ -70,7 +70,7 @@ This is remarkably simple. Looking to the strengths of diffusion models, further
 To convince you of the third point, I decided to create a "canonical 9" using this roundabout method. I trained a denoising diffusion model on MNIST, using one network for both unconditional and conditional denoising. Using this pretrained denoising diffusion model, we can walk the pixels following $\nabla_x\log p(y=9\mid x)$ via the difference of denoising estimates $\hat{x}_{9} - \hat{x}$. 
 
 <figure><center>
-  <img width="200" src="{{site.baseurl}}/assets/images/gradient_estimation/9_.gif" data-action="zoom">
+  <img src="{{site.baseurl}}/assets/images/gradient_estimation/9_.gif" data-action="zoom" style="width:200px;">
    <caption> No backpropagation was used to create this animation, aside from using a pretrained denoising diffusion model. If this image were created via backpropagation on a classifier, it would be an adversarial example. </caption>
 </center></figure>
 
