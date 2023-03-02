@@ -4,7 +4,7 @@ description: Towards a computational theory of embodied emotion.
 excerpt: Towards a computational theory of embodied emotion.
 ---
 
-### Towards a computational theory of embodied emotion.
+## Why did we evolve to carry emotions in our body?
 
 The embodiment of emotion is one of these concepts in neuroscience and psychology that never seems to cohere. Everybody knows it it's true in some way, but no one can agree how. Some paradigms (like motor control) just have no place for it at all. Now, as this hypothesis is beginning to be tested empirically, I thought I'd write about one source of tension in particular – the question of **Why?** Why would we evolve this way? What benefit could it possibly confer? If we answer this, perhaps embodied emotion may not appear so alien to mainstream science.
 
@@ -14,7 +14,9 @@ First, if you're lost to what I mean by 'embodied emotion', take a moment to fee
 
 I'm also referring to the ways in which our bodies also affect our emotional state – the reverse direction of causality. Think back to the last time you took a hot bath. On entering the water your muscles relaxed, and also _you_ relaxed. The arrow of causality runs in both directions: mind -> musculature and musculature -> mind. It's really more that your body is "in the loop" of your emotional state.
 
-This bidirectionality of emotion, mind, and body is no new news. Around the world there are dozens of healing traditions premised on the idea that our bodies affect our emotions, notably in the meridian system underlying acupressure and acupunction. It is a common observation in certain areas of psychology, too. Today, you can find it in titles like _The Body Keeps the Score_ and in theraputic practices under the umbrella of "somatic" practices. In the psychology of emotions, this idea goes back at least to William James, and today it forms the basis of the theory of _constructed emotion_. In this subfield, emotions are held to be _perceptions_ of our bodies's visceral reactions[^2]. This means that they are influenced by the all the same category biases, cultural relativism, and linguistic associations as the rest of our perceptual decisions. Emotions are conceptual categorizations of that visceral stimulus. Emotional categories are perceptual concepts. This explains why motions are not the same across all cultures; for just about every emotion that is felt as a "universal emotion" in the US, there is at least one culture for which that is not a basic emotional category. 
+This bidirectionality of emotion, mind, and body is no new news. Around the world there are dozens of healing traditions premised on the idea that our bodies affect our emotions. The meridian system underlying acupuncture and Shiatsu massage is one notable example. It is also a common observation in certain areas of psychology, too. Today, you can find it in titles like _The Body Keeps the Score_ and in theraputic practices under the umbrella of "somatic" practices. 
+
+In the psychology of emotions, this idea goes back at least to William James, and today it forms the basis of the theory of _constructed emotion_. In this subfield, emotions are held to be _perceptions_ of our bodies's visceral reactions[^2]. This means that they are influenced by the all the same category biases, cultural relativism, and linguistic associations as the rest of our perceptual decisions. Emotions are conceptual categorizations of that visceral stimulus. Emotional categories are perceptual concepts. This explains why motions are not the same across all cultures; for just about every emotion that is felt as a "universal emotion" in the US, there is at least one culture for which that is not a basic emotional category. 
 
 I was shocked when I first heard of constructed emotions, but it quickly made sense of a range of my own personal experiences. If this is now new to you, too, I highly recommend this phenomenal podcast episode by Invisibilia[^3].
 
