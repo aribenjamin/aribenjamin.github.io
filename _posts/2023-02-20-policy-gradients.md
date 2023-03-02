@@ -4,9 +4,9 @@ date: Feb. 20, 2023
 excerpt: How score-based generative models might be the secret to good reinforcement learning in noisy worlds.
 usemathjax: true
 ---
-<!-- <p style="margin-bottom:2cm;font-size:.8em;font-style:italic">
+<p style="margin-bottom:2cm;font-size:.8em;font-style:italic">
 (This is part of my *steal my idea* series. I often have more ideas than time to work on them. If you want to pursue this project, please do! I'd like to be an author and  collaborate as the project unfolds, but I'm not available to be a first author. Send me an email if you're interested and I can tell you who else may be working on this already.)
-</p> -->
+</p>
 
 A common problem in reinforcement learning and in theoretical neuroscience is **gradient estimation**. We have control over our actions (to some degree), and want to optimize them. Observing a reward, we want to update our actions to increase the likelihood of that reward occuring. 
 
