@@ -8,33 +8,27 @@ usemathjax: true
 (This is part of my *steal my idea* series. If you want to pursue this project, please do! I'd like to collaborate as the project unfolds, but I'm not available to be a first author. Send me an email if you're interested and I can tell you who else may be working on this already.)
 </p>
 
-A common problem in reinforcement learning and in theoretical neuroscience is **gradient estimation**. Observing a reward, we want to update our actions to increase the likelihood of that reward occuring.  
+Suppose we have an agent with control over its actions. The environment responds stochastically to these actions, and each action has some associated reward. How can we maximize the expected rewards, given our action-selection policy? 
 
-In this post I derive a gradient estimator designed for use in noisy environments.
+We will define the *policy* of an RL agent is its probability distribution over particular action, $$\pi_\theta(a_t\vert s_t)$$, given the current state $$s_t$$. This policy might be specified by some neural network with parameters $$\theta$$. After an action is taken, there is some state $$s_{t+1}$$ that pulls from $$P(s_{t+1}\vert  a_t)$$, and some reward assocated with that state, $$R(s_{t+1}).$$ It's important to recognize there are **two** sources of stochasticity here. The first is the stochasticity our policy. The second is the stochasticity of the world given our actions.  
 
-## Self-improving in a stochastic world.
+The expected reward of the **next** timestep under our policy, given both sources of stochasticity, can be written as:
 
-Suppose we have an agent with control over its actions. The environment responds stochastically to these actions, and each action has some associated reward. How can we maximize the expected rewards, given our action-selection policy?  
+ $$V^\pi(s_{t+1})=\mathbb{E}_{\pi_\theta(a_t\vert s_t)}\left[\mathbb{E}_{P(s_{t+1}\vert  a_t)}[R(s_{t+1})]\right]$$. 
+ 
+ The first expectation is due to stochasticity in the policy, and the second is due to stochasticity in the world. For simplicity let's ignore the far future and only look one step ahead. 
 
-This is the classic setup of policy gradients. The *policy* of an RL agent is its probability distribution over particular action, $$\pi_\theta(a_t\vert s_t)$$, given the current state $$s_t$$. This policy might be specified by some neural network with parameters $$\theta$$. After an action is taken, there is some state $$s_{t+1}$$ that pulls from $$P(s_{t+1}\vert  a_t)$$, and some reward assocated with that state, $$R(s_{t+1}).$$  
+## Estimating the policy gradient
 
-It's important to recognize there are **two** sources of stochasticity here. The first is the stochasticity our policy. The second is the stochasticity of the world given our actions.  
+In order to improve this expected reward, we need to follow its gradient with respect to the parameters of the policy, $$\nabla_{\theta}V^\pi.$$
 
-The expected reward of the **next** timestep under our policy, given both sources of stochasticity, can be written as $$V^\pi(s_{t+1})=\mathbb{E}_{\pi_\theta(a_t\vert s_t)}\left[\mathbb{E}_{P(s_{t+1}\vert  a_t)}[R(s_{t+1})]\right]$$. The first expectation is due to stochasticity in the policy, and the second is due to stochasticity in the world. For simplicity let's ignore the far future and only look one step ahead. 
-
-### Being smart about the stochastic graph with reparameterization
-
-In order to improve this expected reward, we need to follow its gradient with respect to the parameters of the policy, $$\nabla_{\theta}V^\pi$$.  
-
-At this point I'm going to diverge from the usual treatment of the policy gradient. Usually, we'd invoke the Policy Gradient Theorem or the Deterministic Policy Gradient Theorem so that we don't have to deal with gradients through environmental stochasticity. But let's try to deal with it directly. 
-
-I'll also be using the **reparameterization trick** where possible. The reparameterization trick is an estimator of gradients of expectations with massively lower variance than REINFORCE. As a rule, if you can control your stochasticity, reparameterize it. Otherwise, you're stuck with REINFORCE.
+The first step here is to get gradients of a stochastic policy using the **reparameterization trick**. At this point this is similar to the Deterministic Policy Gradient (DPG) approach.  
 
 For reparameterization we have to be assume that the policy is a deterministic, differentiable function of a different random variable $$\epsilon$$. Then we can pull the gradient inside of the expectation (because now the expectation is only over the stochastic variable). Letting $$a_t = \alpha(\epsilon,\theta,s_t)$$, for some function $$\alpha$$, we have:
 
 $$\nabla_{\theta}\mathbb{E}_{\pi_\theta(a_t\vert s_t)}\left[h(a_t)\right]=\mathbb{E}_\epsilon [\nabla_{\theta}h(\alpha(\epsilon,\theta,s_t))]$$
 
-This is a powerful tool. Above I've put the function we're maximizing as just some stand-in $h(a_t)$. We can go further with the chain rule:
+This is a powerful tool. Above I've put the function we're maximizing as just some stand-in $$h(a_t)$$. We can go further with the chain rule:
 
 $$\nabla_{\theta}\mathbb{E}_{\pi_\theta(a_t\vert s_t)}\left[h(a_t)\right]=\mathbb{E}_\epsilon [\nabla_{a_t}h(a_t)\cdot\nabla_\theta \alpha(\epsilon,\theta,s_t)]$$
 
@@ -44,14 +38,15 @@ Thus, with reparameterization, we can split our desired gradient into two proble
 
 This separation into two problems mirrors the two sources of stochasticity here (policy and environmental).  
 
-There's just one problem here: we can't backpropagate through our environment! The above stand-in $$h(a_t)$$ is the expectation $$\mathbb{E}_{P(s_{t+1}\vert  a_t)}[R(s_{t+1})]$$, and we can't take the gradient of this w/r/t $$a_t$$. While we could assume that rewards are deterministic for games, that will not work for the real world.  
+There's just one problem here: we can't backpropagate through our environment! The above stand-in $$h(a_t)$$ is the expectation $$\mathbb{E}_{P(s_{t+1}\vert  a_t)}[R(s_{t+1})]$$, and we can't take the gradient of this w/r/t $$a_t$$. What should we do? One option is to ignore the environmental stochasticity. This might work well for games. However, this will not work for the real world.  
 
-As a solution, we need some other way of estimating $$\nabla_{a_t}\mathbb{E}_{P(s_{t+1}\vert  a_t)}[R(s_{t+1})]$$.
+To solve this problem we will need some other way of estimating $$\nabla_{a_t}\mathbb{E}_{P(s_{t+1}\vert  a_t)}[R(s_{t+1})]$$.
 
+## Estimating the gradient with respect to $$a_t$$
 
-## Estimating the value gradient, with respect to the policy
+To estimate $$\nabla_{a_t} \mathbb{E}_{P(s_{t+1}\vert  a_t)}[R(s_{t+1})]$$ we'll do two things. First, we'll use the REINFORCE trick, and then we'll plug in for some score estimators.
 
-To estimate $$\nabla_{a_t} \mathbb{E}_{P(s_{t+1}\vert  a_t)}[R(s_{t+1})]$$ we'll use the REINFORCE trick. Written generally, this trick is the identity,
+Written generally, the REINFORCE trick is the identity,
 
 $$\nabla_{\theta}\mathbb{E}_{p(x;\theta)}[f(x)] = \mathbb{E}_{p(x;\theta)}[\nabla_{\theta} \left(\log p(x;\theta)\right) f(x) ]. $$
 
