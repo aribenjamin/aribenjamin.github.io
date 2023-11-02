@@ -4,19 +4,19 @@ date: Feb. 20, 2023
 excerpt: How score-based generative models might be the secret to good reinforcement learning in noisy worlds.
 usemathjax: true
 ---
-<p style="margin-bottom:2cm;font-size:.8em;font-style:italic">
-(This is part of my *steal my idea* series. If you want to pursue this project, please do! I'd like to collaborate as the project unfolds, but I'm not available to be a first author. Send me an email if you're interested and I can tell you who else may be working on this already.)
-</p>
+At its heart, this post is about a very cool mathematical identity that relates one of the most powerful tools in deep learning (score-based generative models) to one of the most central problems in reinforcement learning (policy gradients). 
 
-Suppose we have an agent with control over its actions. The environment responds stochastically to these actions, and each action has some associated reward. How can we maximize the expected rewards, given our action-selection policy? 
+This leads to a new idea for a learning algorithm, but since I'm not an RL researcher and have finite time, I've decided not to run simulations or experiments or submit this to any conference. Instead, I'll just lay out the math and hope that someone else will be inspired to try it out. (If you want to pursue this project, please do! I'd like to collaborate as the project unfolds, but I'm not available to be a first author. Send me an email if you're interested and I can tell you who else may be working on this already.)
 
-We will define the *policy* of an RL agent is its probability distribution over particular action, $$\pi_\theta(a_t\vert s_t)$$, given the current state $$s_t$$. This policy might be specified by some neural network with parameters $$\theta$$. After an action is taken, there is some state $$s_{t+1}$$ that pulls from $$P(s_{t+1}\vert  a_t)$$, and some reward assocated with that state, $$R(s_{t+1}).$$ It's important to recognize there are **two** sources of stochasticity here. The first is the stochasticity our policy. The second is the stochasticity of the world given our actions.  
+Okay, let's get started. Suppose you are agent with control over your own actions. When you act, your state and the environment changes. But these changes are somewhat random and stochastic. You'd like to act to change your state and environment in a favorable way, and therefore must adjust your action *policy*. How can you maximize the expected rewards, given your action-selection policy? 
+
+Let's define the policy of an RL agent as its probability distribution over actions, $$\pi_\theta(a_t\vert s_t)$$, given the current state $$s_t$$. This policy might be specified by some neural network with parameters $$\theta$$. After an action is taken, there is some state $$s_{t+1}$$ that pulls from $$P(s_{t+1}\vert  a_t)$$, and some reward assocated with that state, $$R(s_{t+1}).$$ It's important to recognize there are **two** sources of stochasticity here. The first is the stochasticity our policy. The second is the stochasticity of the world given our actions.  
 
 The expected reward of the **next** timestep under our policy, given both sources of stochasticity, can be written as:
 
  $$V^\pi(s_{t+1})=\mathbb{E}_{\pi_\theta(a_t\vert s_t)}\left[\mathbb{E}_{P(s_{t+1}\vert  a_t)}[R(s_{t+1})]\right]$$. 
  
- The first expectation is due to stochasticity in the policy, and the second is due to stochasticity in the world. For simplicity let's ignore the far future and only look one step ahead. 
+The first expectation is due to stochasticity in the policy, and the second is due to stochasticity in the world. For simplicity let's ignore the far future and only look one step ahead. 
 
 ## Estimating the policy gradient
 
@@ -24,7 +24,7 @@ In order to improve this expected reward, we need to follow its gradient with re
 
 The first step here is to get gradients of a stochastic policy using the **reparameterization trick**. At this point this is similar to the Deterministic Policy Gradient (DPG) approach.  
 
-For reparameterization we have to be assume that the policy is a deterministic, differentiable function of a different random variable $$\epsilon$$. Then we can pull the gradient inside of the expectation (because now the expectation is only over the stochastic variable). Letting $$a_t = \alpha(\epsilon,\theta,s_t)$$, for some function $$\alpha$$, we have:
+For reparameterization to work, though, we have to be assume that the policy is a deterministic, differentiable function of a different random variable $$\epsilon$$. Then we can pull the gradient inside of the expectation (because now the expectation is only over the stochastic variable). Letting $$a_t = \alpha(\epsilon,\theta,s_t)$$, for some function $$\alpha$$, we have:
 
 $$\nabla_{\theta}\mathbb{E}_{\pi_\theta(a_t\vert s_t)}\left[h(a_t)\right]=\mathbb{E}_\epsilon [\nabla_{\theta}h(\alpha(\epsilon,\theta,s_t))]$$
 
