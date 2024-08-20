@@ -25,9 +25,9 @@ Instead of choosing colors by hand, I felt it would be easier to map the similar
 3) Interpret the 3D embedding as locations within a 3D color space in which Euclidean distance corresponds to perceptual similarity. I chose the CIELAB color space.
 
 
-<figure><left>
-  <img width="100" style="float: left" src="{{site.baseurl}}/assets/images/interests/2d.png" data-action="zoom">
-  <caption> You can get a sense of the process here. This is a 2D embedding of the similarity matrix –  distances correspond to topic similarity. I've colored each point by its location in a 3D color space. </caption>
-</left></figure>
+<figure>
+  <img width="300" src="{{site.baseurl}}/assets/images/interests/2d.png" alt="2D embedding of similarity matrix" style="max-width: 100%; height: auto;">
+  <figcaption style="font-size: 0.9em; color: #666; margin-top: 0.5em;">You can get a sense of the process here. This is a 2D embedding of the similarity matrix – distances correspond to topic similarity. I've colored each point by its location in a 3D color space.</figcaption>
+</figure>
 
 

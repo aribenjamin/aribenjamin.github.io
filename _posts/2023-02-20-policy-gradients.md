@@ -8,21 +8,23 @@ At its heart, this post is about a very cool mathematical identity that relates 
 
 This leads to a new idea for a learning algorithm, but since I'm not an RL researcher and have finite time, I've decided not to run simulations or experiments or submit this to any conference. Instead, I'll just lay out the math and hope that someone else will be inspired to try it out. (If you want to pursue this project, please do! I'd like to collaborate as the project unfolds, but I'm not available to be a first author. Send me an email if you're interested and I can tell you who else may be working on this already.)
 
-Okay, let's get started. Suppose you are agent with control over your own actions. When you act, your state and the environment changes. But these changes are somewhat random and stochastic. You'd like to act to change your state and environment in a favorable way, and therefore must adjust your action *policy*. How can you maximize the expected rewards, given your action-selection policy? 
+# Introduction: Policy gradients in a noisy world
+
+Suppose you are agent with control over your own actions. When you act, your state and the environment changes. But these changes are somewhat random and stochastic. You'd like to act to change your state and environment in a favorable way, and therefore must adjust your action *policy*. How can you maximize the expected rewards, given your action-selection policy? 
 
 Let's define the policy of an RL agent as its probability distribution over actions, $$\pi_\theta(a_t\vert s_t)$$, given the current state $$s_t$$. This policy might be specified by some neural network with parameters $$\theta$$. After an action is taken, there is some state $$s_{t+1}$$ that pulls from $$P(s_{t+1}\vert  a_t)$$, and some reward assocated with that state, $$R(s_{t+1}).$$ It's important to recognize there are **two** sources of stochasticity here. The first is the stochasticity our policy. The second is the stochasticity of the world given our actions.  
 
 The expected reward of the **next** timestep under our policy, given both sources of stochasticity, can be written as:
 
- $$V^\pi(s_{t+1})=\mathbb{E}_{\pi_\theta(a_t\vert s_t)}\left[\mathbb{E}_{P(s_{t+1}\vert  a_t)}[R(s_{t+1})]\right]$$. 
+$$V^\pi(s_{t+1})=\mathbb{E}_{\pi_\theta(a_t\vert s_t)}\left[\mathbb{E}_{P(s_{t+1}\vert  a_t)}[R(s_{t+1})]\right]$$. 
  
 The first expectation is due to stochasticity in the policy, and the second is due to stochasticity in the world. For simplicity let's ignore the far future and only look one step ahead. 
 
 ## Estimating the policy gradient
 
-In order to improve this expected reward, we need to follow its gradient with respect to the parameters of the policy, $$\nabla_{\theta}V^\pi.$$
+In order to improve this expected reward, we need to follow its gradient with respect to the parameters of the policy, $$\nabla_{\theta}V^\pi.$$ 
 
-The first step here is to get gradients of a stochastic policy using the **reparameterization trick**. At this point this is similar to the Deterministic Policy Gradient (DPG) approach.  
+There is a lot of good work on this problem already [^1]. The first step here is to get gradients of a stochastic policy using the **reparameterization trick**. At this point this is similar to the Deterministic Policy Gradient (DPG) approach.  
 
 For reparameterization to work, though, we have to be assume that the policy is a deterministic, differentiable function of a different random variable $$\epsilon$$. Then we can pull the gradient inside of the expectation (because now the expectation is only over the stochastic variable). Letting $$a_t = \alpha(\epsilon,\theta,s_t)$$, for some function $$\alpha$$, we have:
 
@@ -89,7 +91,7 @@ This is remarkably simple. Looking to the strengths of diffusion models, further
 2. It will benefit from significant pretraining in sessions without external reward.
 3. It will be much more robust, in the adversarial sense.
 
-To convince you of the third point, I decided to create a "canonical 9" using this roundabout method. I trained a denoising diffusion model on MNIST, using one network for both unconditional and conditional denoising[^4]. Using this pretrained denoising diffusion model, we can walk the pixels following $$\nabla_x\log p(y=9\vert  x)$$ via the difference of denoising estimates $$\hat{x}_{9} - \hat{x}$$. 
+To convince you of the third point, I decided to create a "canonical 9" using this roundabout method. I trained a denoising diffusion model on MNIST, using one network for both unconditional and conditional denoising[^3]. Using this pretrained denoising diffusion model, we can walk the pixels following $$\nabla_x\log p(y=9\vert  x)$$ via the difference of denoising estimates $$\hat{x}_{9} - \hat{x}$$. 
 
 <figure>
   <img src="{{site.baseurl}}/assets/images/gradient_estimation/9_.gif" data-action="zoom" style="width:300px;" class="centerImage" >
